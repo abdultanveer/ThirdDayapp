@@ -12,7 +12,7 @@
         android:theme="@style/Theme.ThirdDayapp"
         tools:targetApi="31">
         <activity
-            android:name=".RoomActivity"
+            android:name=".EspressoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,10 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".RoomActivity"
             android:exported="true">
 
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
