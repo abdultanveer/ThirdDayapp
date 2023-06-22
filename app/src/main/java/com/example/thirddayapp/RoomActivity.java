@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -19,6 +20,7 @@ public class RoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         initViews();
+        mDb = AppDatabase.getInstance(this);
     }
 
 
@@ -35,6 +37,23 @@ public class RoomActivity extends AppCompatActivity {
                 onSaveButtonClicked();
             }
         });
+    }
+
+    public void onSaveButtonClicked() {
+        final Person myPerson = new Person(
+                name.getText().toString(),
+                email.getText().toString(),
+                phoneNumber.getText().toString(),
+                pincode.getText().toString(),
+                city.getText().toString());
+
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                mDb.personDao().insertPerson(myPerson); //inserting data asynchronously on a seperate thread
+            }
+        });
+
     }
 
 }
